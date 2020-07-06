@@ -34,11 +34,12 @@ bot.launch();
 // ========================
 
 bot.start((ctx) => {
-  console.log('From id:', ctx.from.id)
-  console.log('Chat id:', ctx.chat.id)
-  ctx.reply('Welcome')
+  if(ctx.chat.id == sendTo()) ctx.reply('👋 ¡Hola! ')
 })
-bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+bot.command('check', (ctx) => {
+  if(ctx.chat.id == sendTo()) ctx.reply('Estoy vivo 😀')
+})
+// bot.hears('hi', (ctx) => ctx.reply('Hey there'))
 
 
 // ========================
@@ -59,7 +60,7 @@ const text_truncate = (str, length, ending) => {
 
 const parseCommentJira = (msg, commentBody) => {
   if(!commentBody.comment.jsdPublic){
-    msg += ` <u>(Interno)</u>\n`
+    msg += ` <u>(Interno)</u>\n\n`
   } else {
     msg += `\n\n`
   }
@@ -99,11 +100,8 @@ const parseBodyJira = (body) => {
 
 app.post('/webhook', function (req, res) {
   const message = parseBodyJira(req.body);
-  console.log(req.body.issue.fields.issuetype)
-  console.log(req.body.issue.fields.status)
-  console.log(req.body.issue.fields.project)
-  console.log("POST from Lyris IT Jira Service Desk")
-  console.log(message);
+  logger.info("POST from Lyris IT Jira Service Desk")
+  logger.info(message);
   bot.telegram.sendMessage(sendTo(), message, {parse_mode: 'HTML'});
   res.status(204)
 });
