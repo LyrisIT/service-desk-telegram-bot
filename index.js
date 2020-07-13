@@ -103,7 +103,7 @@ app.post('/webhook', function (req, res) {
   logger.info("POST from Lyris IT Jira Service Desk")
   logger.info(message);
   bot.telegram.sendMessage(sendTo(), message, {parse_mode: 'HTML'});
-  res.status(200).json({message: ok})
+  res.status(200).json({code: '200'})
 });
 
 app.get('*', function(req, res){
