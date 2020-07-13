@@ -106,6 +106,10 @@ app.post('/webhook', function (req, res) {
   res.status(204)
 });
 
+app.get('*', function(req, res){
+  res.status(404).json({message: 'Not found'});
+});
+
 // =========================
 // FUNCTIONS
 
@@ -118,13 +122,3 @@ function shutDown() {
 process.on('SIGTERM', shutDown);
 process.on('SIGINT', shutDown);
 
-// bot.on('reconnecting', (reconnecting) => {
-//   f.log(util.inspect(reconnecting, true, 99));
-//   f.log("Lost connection"); LastConnectionLost = new Date();
-// });
-
-// bot.on('reconnected', (reconnected) => { 
-//   f.log(util.inspect(reconnected, true, 99));
-//   f.log("connection successfully");
-//   bot.sendMessage(config.LogChat, "Bot is back online. Lost connection at " + f.getDateTime(LastConnectionLost))
-// });
