@@ -80,6 +80,14 @@ const parseIssueJira = (msg, issueBody) => {
   msg += `<b>- Descripcion</b>: "${text_truncate(issueBody.issue.fields.description)}"`
   return msg
 }
+const parseSimpleIssueJira = (msg, issueBody) => {
+  msg += `\n\n`
+  msg += `<b>- Codigo</b>: ${issueBody.issue.key}\n`
+  msg += `<b>- Tipo</b>: ${issueBody.issue.fields.issuetype.name}\n`
+  msg += `<b>- Issue</b>: ${issueBody.issue.fields.summary}\n`
+  msg += `<b>- Estado</b>: ${issueBody.issue.fields.status.name}\n`
+  return msg
+}
 
 const sendTo = () => {
   if(process.env.APP_ENV == 'prod') return process.env.TELEGRAM_GROUP_ID
@@ -94,8 +102,15 @@ const parseBodyJira = (body) => {
       return parseCommentJira('<b>📩 Comentario creado</b>', body)
     case 'jira:issue_created':
       return parseIssueJira('<b>🆕 Issue creado</b>', body)
+    case 'jira:issue_updated':
+      return parseSimpleIssueJira('<b>📝 Issue actualizado</b>', body)
+    case 'jira:issue_deleted':
+      return parseSimpleIssueJira('<b>🗑️ Issue eliminado</b>', body)
+    default:
+      logger.log(body)
+      break
   }
-  return '- Fail'
+  return 'Webhook no determinado... ¿Error? (Check log)'
 }
 
 app.post('/webhook', function (req, res) {
