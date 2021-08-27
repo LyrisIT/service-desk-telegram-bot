@@ -1,11 +1,10 @@
 require('dotenv').config()
 const { Telegraf } = require('telegraf')
-const Telegram = require('telegraf/telegram')
-// const format = require('date-format')
 const logger = require('./logger')
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
+
 // =========================
 // SETUP 
 
