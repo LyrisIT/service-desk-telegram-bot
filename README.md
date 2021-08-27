@@ -4,10 +4,10 @@
 This is a simple bot made with [Telegraf](https://telegraf.js.org/). Exclusively made for a telegram group for the developers to recieve updates from Jira Service Desk
 
 ### Problem
-We needed something simple to leave notes on the go but we didnt wanted another service.
+We needed a bot that listen to Jira Service Help Desk webhooks and notifies us.
 
 ### Solution
-Create a bot in Telegram that saves our logs in a database, and also retrieve the logs in a easy way.
+Create a bot in Telegram that recieves a webhook and send us to a chat group.
 
 ### Setup
 
