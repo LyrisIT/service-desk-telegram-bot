@@ -1,4 +1,4 @@
-# Lyris IT BOT
+# Service Desk - Telegram Bot
 > A Telegram BOT for Lyris IT
 
 This is a simple bot made with [Telegraf](https://telegraf.js.org/). Exclusively made for a telegram group for the developers to recieve updates from Jira Service Desk
